@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"><script src="https://cdn.tailwindcss.com"></script>
+  <title></title>
+</head>
+<div th:fragment="info">
+  <body class="bg-zinc-400 mx-auto rounded">
+  <div>
+    <h2 class="text-center mt-20 text-[50px] italic"><b>Veteriner App</b></h2>
+    <hr>
+    <p class="text-center mt-[10px] text-[22px] italic"><b>Veteriner App</b> veterinerlik işlemleri için geliştirilmiştir.</p>
+    <p class="text center ml-[100px] mt-[10px] text-[22px] italic">Peki neler yapabilirsin? Sisteme giriş yapabilirsin. Sahip olduğunuz role göre hayvan sahibi ve hayvan ekleme, silme, güncelleme gibi işlemler yapabilirsin. Hayvan adı veya hayvan sahibi adı ile arama yapabilir ve kayıtları görüntüleyebilirsin.</p>
+    <p class="text-center mt-[10px] text-[22px] italic"><b>Kullanılan teknolojiler:</b> Spring boot, Spring Mvc, Spring Security, Spring JPA, H2 Database, Javax Validation, Thymeleaf, Tailwind css</p>
+    <hr>
+      <div class="ml-[700px] mt-[20px] ">
+    <a href="/login" type="submit" class="bg-blue-500 hover:bg-blue-700 hover-center text-white font-bold py-2 px-4 rounded">
+      Giriş Yap
+    </a>
+      </div>
+    </div>
+  </body>
+</div>
+</html>

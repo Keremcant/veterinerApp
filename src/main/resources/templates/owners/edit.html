@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<div class="flex">
+    <div th:insert="fragments/menu.html :: menu"></div>
+    <div class="flex-col w-full h-screen bg-zinc-200">
+        <div th:insert="fragments/header.html :: header"></div>
+        <div class="w-4/6 mx-auto flex-col justify-start mt-10">
+            <form action="#" th:action="@{/owners/edit/{id}(id=${owner.getId()})}" th:object="${owner}" method="post" class="w-full mx-auto mt-10">
+                <div class="text-xl text-center">
+                    <h4>HAYVAN SAHİBİ DÜZENLE</h4></div>
+                <hr>
+                <div class="bg-red-200 rounded-lg px-2 py-2" th:if="${#fields.hasErrors('*')}">
+                    <p class="text-gray-900" th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+                </div>
+                <div class="mb-4">
+                    <input type="text" class="rounded px-1 py-3 w-full border border-gray-300" th:field="*{name}" placeholder="İsim" th:errorclass="is-invalid">
+                </div>
+                <div class="mb-4">
+                    <input type="text" class="rounded px-1 py-3 w-full border border-gray-300" th:field="*{surname}" placeholder="Soyisim" th:errorclass="is-invalid">
+                </div>
+                <div class="mb-4">
+                    <input type="text" class="rounded px-1 py-3 w-full border border-gray-300" th:field="*{address}" placeholder="Adres" th:errorclass="is-invalid">
+                </div>
+                <div class="mb-4">
+                    <input type="text" class="rounded px-1 py-3 w-full border border-gray-300" th:field="*{mail}" placeholder="Email" th:errorclass="is-invalid">
+                </div>
+                <div class="mb-4">
+                    <input type="text" class="rounded px-1 py-3 w-full border border-gray-300" th:field="*{phoneNumber}" placeholder="Telefon" th:errorclass="is-invalid">
+                </div>
+                <div>
+                    <input type="submit" class="bg-cyan-700 rounded px-2 text-white w-full" value="Güncelle" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

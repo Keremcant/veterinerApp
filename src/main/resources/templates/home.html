@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="tr">
+
+<head th:replace="fragments/head :: head"></head>
+
+<body>
+
+<div class="flex-col w-full mx-auto" sec:authorize="isAnonymous()">
+  <div th:insert="fragments/info.html :: info"></div>
+</div>
+
+<div sec:authorize="hasAuthority('ADMIN') || hasAuthority('VETERİNARY')">
+  <div class="flex bg-gray-300">
+    <div th:insert="fragments/menu.html :: menu"></div>
+    <div class="flex-col w-full h-screen bg-slate-100">
+      <div th:insert="fragments/header.html :: header"></div>
+
+      <div class="flex w-4/6 mx-auto mt-10 justify-between items-center">
+        <div class="text-center">
+          <h4>Kayıtlı Hayvan Sahibi Sayısı</h4>
+          <span th:text="${ownerCount}" class="text-3xl mt-2 font-bold"></span>
+        </div>
+        <div class="text-center">
+          <h4 class="text-center">Kayıtlı Hayvan Sayısı</h4>
+          <span th:text="${petCount}" class="text-3xl mt-2 font-bold"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

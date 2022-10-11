@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+
+<body>
+<div class="flex">
+    <div th:insert="fragments/menu.html :: menu"></div>
+    <div class="w-full bg-slate-100">
+        <div th:insert="fragments/header.html :: header"></div>
+
+        <div th:if="${owners.size() != 0}">
+            <div class="w-4/6 mx-auto mt-10">
+                <table class="w-full overflow-y-auto max-h-96">
+                    <thead class="border-b border-blue-800">
+                    <tr>
+                        <th class="text-left">İsim</th>
+                        <th class="text-left">Soyisim</th>
+                        <th class="text-left">Email</th>
+                        <th class="text-left">Hayvan Sayısı</th>
+                        <th class="text-left">Seçenekler</th>
+                    </tr>
+                    </thead>
+                    <tbody th:each="owner: ${owners}">
+                    <tr class="border-b border-blue-200">
+                        <td th:text="${owner.getName()}" class="py-4"></td>
+                        <td th:text="${owner.getSurname()}"></td>
+                        <td th:text="${owner.getMail()}"></td>
+                        <td th:text="${owner.getPets().size()}"></td>
+                        <td class="flex items-center py-4">
+                            <a th:href="@{/owners/show/{id}(id=${owner.getId()})}"  title="Göster" class="">
+                                <span th:replace="fragments/svg/icons :: showIcon"></span>
+                            </a>
+                            <a th:href="@{/owners/edit/{id}(id=${owner.getId()})}" class="ml-2" title="Düzenle">
+                                <span th:replace="fragments/svg/icons :: editIcon"></span>
+                            </a>
+                            <a th:href="@{/owners/{id}/pets/create(id=${owner.getId()})}" class="ml-2" title="Hayvan Ekle">
+                                <span th:replace="fragments/svg/icons :: addPetIcon"></span>
+                            </a>
+                            <form class="ml-2" sec:authorize="hasAuthority('ADMIN')" id="ownerIndexDeleteForm" th:method="post" th:action="@{/admin/owners/delete/{id}(id=${owner.getId()})}">
+                                <button type="submit" title="Sil">
+                                    <span th:replace="fragments/svg/icons :: deleteIcon"></span>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="text-center mt-10" th:unless="${owners.size() != 0}">Henüz kayıtlı hayvan sahibi yok!</div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+        document.getElementById("ownerIndexDeleteForm").addEventListener("click", function (event){
+            if (confirm("Bu Kayıt Silinecek!") == false) {
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
